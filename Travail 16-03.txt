@@ -1,0 +1,35 @@
+Projet Osu! bot, Forestas, Chiquet, Vicat
+
+Dans le premier TP, nous avons trouvé comment utiliser pyautogui pour simuler un appuis sur le clavier via python, cela nous sera essentiel pour notre programme "replay"
+
+Pour ce TP, nous avons voulu commencer par le programme replay.
+Nous avons créés des niveau tests pour pouvoir interpreter les fichiers liés à ces niveaux.
+
+Dans le fichier, seul la partie [HitObjects] en bas nous interesses, c'est celle qui contient les touches.
+Il y'a deux types de touches, les courtes, où un joueur doit simplement faire un appuis, et les longues où le joueur doit rester appuyé sur une touche pendant un certain temps.
+
+
+Une note courte s'écrit de cette façon:
+
+64,192,41998,5,8,0:0:0:40:DunDun.wav
+
+La premiere valeur est le numéro de la colonne, chaque niveau possede un nombre de colonnes, si l'on appelle k ce nombre total de colonnes, le numéro associé à la n-ème colonne est: (512/(k*2) + (n-1)*512/k)//1                                  
+La deuxieme valeur n'a pas d'importance, elle vaudra toujours 192 (la deuxieme valeur est censé représenter une valeur sur l'axe y de l'ecran dans un autre mode de jeu)
+La troisième valeur indique le moment où l'on doit appuyer (en millisecondes par rapport au début du niveau), dans le cas au dessus, la touche se trouve à 41,992ms exactement
+
+Toutes les autres valeurs ne nous sont pas importantes car elles ne sont là que pour le jeu
+Par exemple le 40:DunDun.wav indique le jeu va jouer pendant 40ms le fichier DunDun.wav, le 5 que la touche est un début de combo, le 8 qu'il faudra jouer le 8eme mp3 du jeu....
+Encore une fois toutes ces valeurs sont à ignorer pour ce projet
+
+
+Une note longue s'écrit de cette façon:
+
+320,192,41998,128,0,42298:0:0:0:0:
+
+Les 5 premieres valeurs et les quatre dernieres sont les meme que pour les notes courtes. (la 4eme valeur est à 128 car cest une note longue)
+La seule difference est l'ajout d'une valeur en 6eme position, elle indique quand la note se termine
+Par exemple cette touche se trouve sur la 3eme colonne, et le joueur devra appuyer de 41,998s à 42,298ms
+
+
+
+Apres avoir fait cela nous avons fait le programme pour normaliser ces fichiers dans Normalisation.py qui est sur le github
