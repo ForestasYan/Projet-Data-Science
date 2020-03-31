@@ -10,7 +10,7 @@ def normalisation(emplacement):
     liste, nb_colonnes = liste_lignes(texte)
     lignes_types = determiner_type_note(liste)
     liste_appuis = creer_apuis(lignes_types, nb_colonnes)
-    return liste_appuis
+    return liste_appuis, nb_colonnes
 
 
 
@@ -68,7 +68,7 @@ def creer_apuis(lignes_types, nb_colonnes):
                 val2 += 1
             val_debut = int(ligne[1][val+5:val2])
             #on va appuyer 10ms par note courte
-            appuis.append([int((((1/2 + (val_col/(512/nb_colonnes)))//1)+1)), val_debut, val_debut+10])
+            appuis.append([int((val_col - 512/(2*nb_colonnes))/(512/nb_colonnes)), val_debut, val_debut+10])
         
         else:
             val = 0
@@ -87,5 +87,5 @@ def creer_apuis(lignes_types, nb_colonnes):
                     val2 = val3+1
                 val3 += 1
             val_fin = int(ligne[1][val2:val3])
-            appuis.append([int((((1/2 + (val_col/(512/nb_colonnes)))//1)+1)), val_debut, val_fin])     
+            appuis.append([int((val_col - 512/(2*nb_colonnes))/(512/nb_colonnes)), val_debut, val_fin])     
     return appuis
